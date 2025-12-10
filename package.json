@@ -1,17 +1,1 @@
-{
-
-"name": "zakend",
-  "version": "1.0.0",
-  "description": "A simple Express app by Zakhe",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "build": "echo \"No build step required for this simple app\"",
-    "deploy": "echo \"Deployment script depends on your hosting provider\""
-  },
-  "dependencies": {
-    "express": "^5.2.1",
-    "nodemon": "^3.1.11"
-  }
-}
+{"name":"zakend","version":"1.0.0","description":"A simple Express app by Zakhe","main":"index.js","scripts":{"start":"node server.js","dev":"nodemon server.js","build":"echo \"No build step required for this simple app\"","deploy":"echo \"Deployment script depends on your hosting provider\""},"dependencies":{"dotenv":"^17.2.3","express":"^5.2.1","mongodb":"^7.0.0","mongoose":"^9.0.1","nodemon":"^3.1.11"},"repository":{"type":"git","url":"git+https://github.com/ZakheNet/PostAQuote.git"},"author":"ZakheMokoena","license":"ISC","bugs":{"url":"https://github.com/ZakheNet/PostAQuote/issues"},"homepage":"https://github.com/ZakheNet/PostAQuote#readme"}
