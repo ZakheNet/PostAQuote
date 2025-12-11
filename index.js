@@ -1,30 +1,33 @@
-require("dotenv").config()
-const express = require("express")
+const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
-const mongoose = require("mongoose")
+const port = 3000
+const path = require("path")
 
-const UserSchema = new mongoose.Schema({name:String,password:Number})
-const User = mongoose.model("User",UserSchema,"users")
+app.use(express.static("public"))
 
-async function ConnectDB(){
-    try{
-        await mongoose.connect(process.env.DBString)
+mongoose.connect("mongodb://localhost:27017/App")
+mongoose.connection.once("open",()=>console.log("DB Connected!!!"))
+mongoose.connection.on("error",(error)=>console.log("ERROR::"+error))
+
+
+const userSchema = new mongoose.Schema({"name":{type:String,required:true}})
+const User = mongoose.model("User",userSchema,"users")
+
+
+app.get('/', (req, res)=> {
+    res.sendFile(path.join(__dirname+"/public/home.html"))
+    async function getdata(){
+        await User.insertOne({name:"Wednesday"})
+        await User.deleteOne({name:"Wednesday"})
+        const data = await User.find()
+        console.log(data);
+        
     }
-    catch(error){
-        console.log(error)
-    }
-}
-const PORT = process.env.PORT || 5000
-ConnectDB()
-mongoose.connection.once("open",()=>{
-                console.log("DB Connected!")
-                app.listen(PORT,()=>console.log("Port:"+PORT+" is Live"))
-            })
-
-app.get('/', (req, res) => {
-
-    console.log(User.findOne({name:"Hero"}));
+    getdata()
     
-  res.send('HELLO KING!!')
 })
+
+app.listen(port,()=>console.log("Host is Live!!!"))
+
 
