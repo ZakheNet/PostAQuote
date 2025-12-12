@@ -64,3 +64,5 @@ body {
 input:focus {
   transform: scale(1.1);
 }
+
+footer{background: grey;position: fixed;bottom: 0;width: 100vw;text-align: center;padding: 0.2rem;color: white;text-shadow: 0rem 0rem 0.5rem black;}
