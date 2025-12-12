@@ -1,33 +1,17 @@
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require("express")
 const app = express()
-const port = 3000
+require("dotenv").config()
 const path = require("path")
 
 app.use(express.static("public"))
+const PORT = process.env.PORT || 8000
 
-mongoose.connect("mongodb://localhost:27017/App")
-mongoose.connection.once("open",()=>console.log("DB Connected!!!"))
-mongoose.connection.on("error",(error)=>console.log("ERROR::"+error))
+app.listen(PORT,()=>console.log("Port:"+PORT+" is Live!"))
 
-
-const userSchema = new mongoose.Schema({"name":{type:String,required:true}})
-const User = mongoose.model("User",userSchema,"users")
-
-
-app.get('/', (req, res)=> {
+app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname+"/public/home.html"))
-    async function getdata(){
-        await User.insertOne({name:"Wednesday"})
-        await User.deleteOne({name:"Wednesday"})
-        const data = await User.find()
-        console.log(data);
-        
-    }
-    getdata()
-    
 })
 
-app.listen(port,()=>console.log("Host is Live!!!"))
-
-
+app.post('/', function (req, res) {
+  res.send('POST request to the homepage')
+})

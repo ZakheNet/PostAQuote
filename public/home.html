@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friend Or Stranger</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
+
 <body>
     <header>
         <h1>Friend Or Stranger</h1>
         <h3>How well do they know you?</h3>
     </header>
     <main>
-        
-    </main>    
+        <section class="mainSec">
+
+            <div class="logInput">
+                <p>Your Name / Nickname</p>
+                <input  id="name" name="name" required type="text" placeholder="eg. Zack">
+            </div>
+            <div class="logInput">
+                <p>Password / Pin</p>
+                <input id="password" name="password" required type="text" placeholder="Enter pin or password">
+            </div>
+            <button class="logButton" onclick="LogIn()">LogIn</button>
+            <div id="logWarning" class="logWarnOff">
+                <p>Warning:</p>
+                <p><b id="logWarnText">Use these details to view scoreboard / results</b></p>
+            </div>
+            <div class="logAbout">
+                <p>NB:</p>
+                <p><b>Use these details to view scoreboard / results</b></p>
+            </div>
+
+        </section>
+    </main>
 </body>
 </html>
