@@ -1,17 +1,22 @@
+require("dotenv").config()
 const express = require("express")
 const app = express()
-require("dotenv").config()
-const path = require("path")
-
-app.use(express.static("public"))
+const mongoose = require("mongoose")
 const PORT = process.env.PORT || 8000
+const DBString = process.env.DBString
 
-app.listen(PORT,()=>console.log("Port:"+PORT+" is Live!"))
+
+async function StartServer(){
+    await mongoose.connect(DBString)
+    mongoose.connection.once("open",()=>{
+        console.log("Database Active!")
+    })
+}
+
+app.listen(PORT,()=>{console.log("Port:"+PORT+" is Live!")})
+StartServer()
+
 
 app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname+"/public/home.html"))
-})
-
-app.post('/', function (req, res) {
-  res.send('POST request to the homepage')
+    res.send("LIVE!!!")
 })

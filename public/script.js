@@ -1,4 +1,4 @@
-function LogIn(){
+async function LogIn(){
     console.log("Submit!")
     let name = document.getElementById("name").value
     let password = document.getElementById("password").value
@@ -14,7 +14,11 @@ function LogIn(){
         document.getElementById("logWarning").setAttribute("class","logWarnOn")
     }
     else{document.getElementById("logWarning").setAttribute("class","logWarnOff")}
+    if(name==""||password==""){return}
+
+    
+
+   
    
 }
-
 console.log("Script Connected");

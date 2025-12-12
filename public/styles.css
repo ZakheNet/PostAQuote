@@ -18,6 +18,15 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.logBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(209, 209, 209);
+  padding: 1rem;
+  border-radius: 0.6rem;
+  box-shadow: 0rem 0rem 0.25rem black inset;
+}
 
 .logInput {
   font-size: 1.5rem;
@@ -27,8 +36,8 @@ body {
   margin: 0.5rem;
   input {
     font-size: 1.5rem;
-    border-radius: 1rem;
-    border: solid black 0.1rem;
+    border-radius: 5rem;
+    border: solid rgba(0, 0, 0, 0) 0.1rem;
     padding: 0.3rem 0.7rem;
   }
 }
@@ -37,8 +46,8 @@ body {
   font-size: 1.5rem;
   background: limegreen;
   padding: 0.2rem 1.2rem;
-  border: solid 0.1rem;
-  box-shadow: 0rem 0rem 0.2rem black;
+  border: solid 0.1rem rgba(0, 0, 0, 0.377) ;
+  box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.8);
   margin: 1rem 0 0;
 }
 
@@ -65,4 +74,13 @@ input:focus {
   transform: scale(1.1);
 }
 
-footer{background: grey;position: fixed;bottom: 0;width: 100vw;text-align: center;padding: 0.2rem;color: white;text-shadow: 0rem 0rem 0.5rem black;}
+footer {
+  background: grey;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
+  padding: 0.2rem;
+  color: white;
+  text-shadow: 0rem 0rem 0.5rem black;
+}
