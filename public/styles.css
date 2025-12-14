@@ -1,3 +1,4 @@
+/* LOGIN STYLE CSS */
 * {
   font-family: arial;
   box-sizing: border-box;
@@ -42,13 +43,14 @@ body {
   }
 }
 
-.logButton {
+.logButton,.skipTopic {
   font-size: 1.5rem;
   background: limegreen;
   padding: 0.2rem 1.2rem;
-  border: solid 0.1rem rgba(0, 0, 0, 0.377) ;
+  border: solid 0.1rem rgba(0, 0, 0, 0.377);
   box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.8);
   margin: 1rem 0 0;
+  font-weight: bold;
 }
 
 .logAbout,
@@ -84,3 +86,39 @@ footer {
   color: white;
   text-shadow: 0rem 0rem 0.5rem black;
 }
+
+/* MAKE QUIZ STYLE CSS */
+
+.makerQuestion{text-align: center;margin-top: 2rem;}
+.allLogosBox {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+
+ 
+  
+  .logoBox{margin: 2%};
+  .logoTittle{font-size: 1.5rem;font-weight: bold;text-align: center};
+  .logoImageBox{
+    max-width: 35vw;
+    max-height: 30vh;
+    aspect-ratio: 1/1;
+    border: solid black 0.1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{width: 90%;height: 90%;border-radius: 0.5rem;}
+  }
+}
+
+.skipBtnBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ @media (min-width:500px){
+    .allLogosBox{grid-template-columns: 1fr 1fr 1fr;}
+  }

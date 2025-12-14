@@ -1,24 +1,20 @@
-async function LogIn(){
-    console.log("Submit!")
+
+
+async function CreateQuiz() {
+    console.log("Create Quiz!")
     let name = document.getElementById("name").value
-    let password = document.getElementById("password").value
-
-    if(name==""){
-        console.log("No Name!");
-        document.getElementById("logWarnText").innerText="Name/Nickname is missing"
-        document.getElementById("logWarning").setAttribute("class","logWarnOn")
-    }
-    else if(password==""){
-        console.log("No Name!");
-        document.getElementById("logWarnText").innerText="Pin/Password is missing"
-        document.getElementById("logWarning").setAttribute("class","logWarnOn")
-    }
-    else{document.getElementById("logWarning").setAttribute("class","logWarnOff")}
-    if(name==""||password==""){return}
-
-    
-
    
-   
+
+    if (name == "") {
+        console.log("No Name!");
+        document.getElementById("logWarnText").innerText = "Name/Nickname is missing"
+        document.getElementById("logWarning").setAttribute("class", "logWarnOn")
+        return
+    }
+    else{ document.getElementById("logWarning").setAttribute("class", "logWarnOff") }
+
+    window.location.href = "/MakeQuiz" 
+
 }
 console.log("Script Connected");
+
