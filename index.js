@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "public")))
 
 const ConnectDB = async () => {
     try {
-        await mongoose.connect(process.env.DBString0)
+        await mongoose.connect(process.env.DBString)
         app.listen(PORT, () => { console.log("PORT:" + PORT + " Live!") })
     }
     catch(error){console.log("Error Connecting Database: "+error)}
