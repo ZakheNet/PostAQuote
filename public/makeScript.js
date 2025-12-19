@@ -7,9 +7,13 @@ let TopicOder = []
 let Picks = {}
 let questionText = ""
 let onRound = 1
+let username ="noName"
 let officialTopics = []
 let browseTopic = -1
 let onTopic = "Loading... :)"
+
+
+setName()
 
 function SetUpQuizMake() {
 
@@ -71,14 +75,16 @@ function NextRound() {
 
         function SetLogos() {
             for (let index = 1; index < 7; index++) {
-                
-                document.getElementById(`logoTittle${index}`).innerText=Item[onTopic][index-1]
 
-                document.getElementById(`logo${index}`).setAttribute("src", `./logo/${onTopic}/${Item[onTopic][index-1]}.png`)
+                document.getElementById(`logoTittle${index}`).innerText = TittleFix(Item[onTopic][index - 1])
+
+
+                document.getElementById(`logo${index}`).setAttribute("src", `./logo/${onTopic}/${Item[onTopic][index - 1]}.png`)
 
             }
         }
         SetLogos()
+
     }
 
     SetRoundValues()
@@ -87,27 +93,83 @@ function NextRound() {
 NextRound()
 
 function skipTopic() {
-NextRound()
+    NextRound()
 }
 
 
-function pick1(){picked(1)}
-function pick2(){picked(2)}
-function pick3(){picked(3)}
-function pick4(){picked(4)}
-function pick5(){picked(5)}
-function pick6(){picked(6)}
+function pick1() { picked(1) }
+function pick2() { picked(2) }
+function pick3() { picked(3) }
+function pick4() { picked(4) }
+function pick5() { picked(5) }
+function pick6() { picked(6) }
 
-function picked(num){
-    Picks[onTopic]=Item[onTopic][num-1]
+function picked(num) {
+    Picks[onTopic] = Item[onTopic][num - 1]
     officialTopics.push(onTopic)
 
-    if(onRound<10){
-        onRound+=1
+    if (onRound < 10) {
+        onRound += 1
         NextRound()
     }
+    else {
+        Finished()
+    }
 
-    console.log(Picks);
+}
+
+
+function TittleFix(word) {
+
+    switch (word) {
+        case "sa": return "South Africa"
+        case "usa": return "USA"
+        case "scifi": return "Sci-Fi"
+        case "psg": return "PSG";
+        case "manunited": return "Man United"
+        case "mancity": return "Man City"
+        case "realmadrid": return "Real Madrid"
+        case "whatsapp": return "WhatsApp"
+        case "youtube": return "YouTube"
+        case "tiktok": return "TikTok"
+        case "rnb": return "R&B"
+        case "hiphop": return "HipHop"
+        case "icecream": return "IceCream"
+        case "vw": return "VW"
+        case "bmw": return "BMW"
+        case "amusementpark": return "Amusement Park"
+        case "candycrush": return "Candy Crush"
+        case "cod": return "Call Of Duty"
+        case "louisvuitton": return "Louis Vuitton"
+        case "": return ""
+        default:
+            break;
+    }
+
+    return word.slice(0, 1).toUpperCase() + word.slice(1)
+}
+
+async function setName(){
+    username = await cookieStore.get("username").then(res=>res["value"])      
+}
+
+async function Finished(){
+    const response = await fetch("/sharing",{method:"POST",headers:{"Content-Type":"application/json"},body:  JSON. stringify({"name":username,Picks,officialTopics})})
+    console.log("::::::"+username);
     
-    
+    if(response.status!=200){
+        console.log("Error Occured");
+        
+        return
+    }
+    if(response.status==200){
+        console.log("EVERYTHIGN GOOOD");
+        const resData = await response.json()
+        console.log(await resData);
+        if(resData["state"]=="good"){
+            cookieStore.set("gameLink",resData["link"])
+            window.location.href=resData["page"]
+        }
+    }
+
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="scorestyle.css">
+</head>
+
+<body>
+    <header>
+        <h1>Friend Or Stranger</h1>
+        <h2 id="nameZone">Scoreboard</h2>
+    </header>
+    <main>
+        <table id="scoreTable">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Score</td>
+                </tr>
+            </thead>
+        </table>
+    </main>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        body {
+            font-family: arial;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        table {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        thead {
+            tr {
+                background: rgb(0, 173, 101);
+            }
+
+            ;
+
+            td {
+                padding: 0.3rem 0.6rem;
+                min-width: 15ch;
+            }
+        }
+    </style>
+    <script>
+        async function GetScores() {
+
+            let gameId = window.location.href.split("/", 5)[4]
+            const data = await fetch("/scoresData/" + gameId).then(res => res.json()).then(data =>data["0"]["players"])
+            data.map(x => {
+                if(x["score"]>=99){return}
+                const preData =document.getElementById("scoreTable").innerHTML
+                document.getElementById("scoreTable").innerHTML=`<tr><td>${x["name"]}</td><td>${x["score"]}0%</td></tr>`+preData
+            })
+            const nameZone = await fetch("/gameOwner/"+gameId).then(x=>x.json()).then(z=>z["0"]["name"])
+            
+            document.getElementById("nameZone").innerText=nameZone+"'s Quiz - Scoreboard"
+
+        }
+        GetScores()
+    </script>
+</body>
+
+</html>

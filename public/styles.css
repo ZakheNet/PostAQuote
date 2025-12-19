@@ -40,6 +40,7 @@ body {
     border-radius: 5rem;
     border: solid rgba(0, 0, 0, 0) 0.1rem;
     padding: 0.3rem 0.7rem;
+    margin-top: 0.5rem;
   }
 }
 
@@ -98,14 +99,16 @@ footer {
 
  
   
-  .logoBox{margin: 2%};
+  .logoBox{margin: 2%
+  
+    ;border: solid black 0.1rem;
+    border-radius: 0.5rem;
+  };
   .logoTittle{font-size: 1.5rem;font-weight: bold;text-align: center};
   .logoImageBox{
     max-width: 35vw;
     max-height: 30vh;
     aspect-ratio: 1/1;
-    border: solid black 0.1rem;
-    border-radius: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,12 +116,22 @@ footer {
   }
 }
 
-.skipBtnBox{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+@media (min-width:500px){
+  .allLogosBox{grid-template-columns: 1fr 1fr 1fr;}
+  
+  .skipBtnBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
- @media (min-width:500px){
-    .allLogosBox{grid-template-columns: 1fr 1fr 1fr;}
-  }
+/* SHARE LINK STYLE CSS */
+.linkBox,.sharing{display: flex;flex-direction: column;align-items: center;}
+.shareLink{font-weight: bold;font-size: 1.4rem;}
+
+/* PLAY QUIZ STYLE CSS */
+
+
+
