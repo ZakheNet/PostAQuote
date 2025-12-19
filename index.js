@@ -1,4 +1,4 @@
-require("dotenv").config()
+/* require("dotenv").config() */
 const { log } = require("console")
 const print = console.log()
 const express = require("express")
