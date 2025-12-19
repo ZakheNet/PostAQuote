@@ -104,7 +104,7 @@ function pick4() { picked(4) }
 function pick5() { picked(5) }
 function pick6() { picked(6) }
 
-function picked(num) {
+function picked(num){
     Picks[onTopic] = Item[onTopic][num - 1]
     officialTopics.push(onTopic)
 
@@ -115,7 +115,6 @@ function picked(num) {
     else {
         Finished()
     }
-
 }
 
 
@@ -154,6 +153,8 @@ async function setName(){
 }
 
 async function Finished(){
+
+    document.getElementById("logozSec").innerHTML=""
     const response = await fetch("/sharing",{method:"POST",headers:{"Content-Type":"application/json"},body:  JSON. stringify({"name":username,Picks,officialTopics})})
     console.log("::::::"+username);
     
