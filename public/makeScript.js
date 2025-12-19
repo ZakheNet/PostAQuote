@@ -78,6 +78,7 @@ function NextRound() {
 
                 document.getElementById(`logoTittle${index}`).innerText = TittleFix(Item[onTopic][index - 1])
 
+                document.getElementById(`logo${index}`).setAttribute("src", ``)
 
                 document.getElementById(`logo${index}`).setAttribute("src", `./logo/${onTopic}/${Item[onTopic][index - 1]}.png`)
 
@@ -154,7 +155,7 @@ async function setName(){
 
 async function Finished(){
 
-    document.getElementById("logozSec").innerHTML=""
+    document.getElementById("makeBody").innerHTML="<h1>Loading...</h1>"
     const response = await fetch("/sharing",{method:"POST",headers:{"Content-Type":"application/json"},body:  JSON. stringify({"name":username,Picks,officialTopics})})
     console.log("::::::"+username);
     

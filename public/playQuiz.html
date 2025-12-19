@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styleQuiz.css">
 </head>
 
-<body>
+<body id="playBody">
     <header></header>
     <main>
         <section class="playLogIn" id="playLogIn">
@@ -344,11 +344,12 @@
                 }
                 document.getElementById("roundTopic").innerText = questionText
 
-                function SetLogos() {
+                 function SetLogos() {
                     for (let index = 1; index < 7; index++) {
 
                         document.getElementById(`logoTittle${index}`).innerText = TittleFix(Item[onTopic][index - 1])
 
+                        document.getElementById(`logo${index}`).setAttribute("src", ``)
 
                         document.getElementById(`logo${index}`).setAttribute("src", `../logo/${onTopic}/${Item[onTopic][index - 1]}.png`)
 
@@ -438,7 +439,7 @@
 
             score = ScoreCalc()
 
-            document.getElementById("logozSec").innerHTML=""
+            document.getElementById("playBody").innerHTML="<h1>Loading...</h1>"
 
             const response = await fetch("/played", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "name": username, score, gameId: gameData["gameId"] }) }).then(res=>res.json())
 
