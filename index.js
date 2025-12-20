@@ -9,12 +9,13 @@ const path = require("path")
 app.set("trust proxy", true);
 app.use(express.static("./public"))
 app.use(express.json())
+const DEV = false
 
 app.use(express.static(path.join(__dirname, "public")))
 
 const ConnectDB = async () => {
     try {
-        await mongoose.connect(process.env.DBString0)
+        await mongoose.connect(DEV? process.env.DBString0:process.env.DBString)
         app.listen(PORT, () => { console.log("PORT:" + PORT + " Live!") })
     }
     catch(error){console.log("Error Connecting Database: "+error)}
@@ -40,8 +41,6 @@ app.get('/quiz/:gameId', (req, res) => {
     res.sendFile(path.join(__dirname + "/public/playQuiz.html"))
 })
 
-
-
 app.get("/share", async (req, res) => {
     res.sendFile(path.join(__dirname + "/public/share.html")) 
 })
@@ -50,8 +49,7 @@ app.post("/sharing", async (req, res) => {
     const {name,officialTopics,Picks}=req.body
     const DTime= new Date
     const gameId = Math.ceil(Math.random()*9999)+name.toLowerCase()
-    const link0 = "localhost:"+PORT+"/quiz/"+gameId
-    const link = "https://friendorstranger.vercel.app/"+"quiz/"+gameId
+    const link = DEV? "localhost:"+PORT+"/quiz/"+gameId : "https://friendorstranger.vercel.app/"+"quiz/"+gameId
     const page = "/share"
     const state = "good"
     const dob = DTime.getDate()+"/"+(DTime.getMonth()+1)+"/"+DTime.getFullYear()
@@ -59,7 +57,7 @@ app.post("/sharing", async (req, res) => {
     PlayerDB.insertOne({"name":name,"gameId":gameId,"created":dob,Picks,officialTopics,"players":[{name,myIp:req.ip,score:99}]})
     
 
-    res.json({name,link:link0,page,state})
+    res.json({name,link,page,state})
   
 })
 
