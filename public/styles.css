@@ -1,3 +1,44 @@
+@font-face {
+  font-family: font2;
+  src: url("./fonts/font2.ttf");
+}
+@font-face {
+  font-family: font3;
+  src: url("./fonts/font3.ttf");
+}
+@font-face {
+  font-family: font4;
+  src: url("./fonts/font4.ttf");
+}
+@font-face {
+  font-family: font5;
+  src: url("./fonts/font5.ttf");
+}
+@font-face {
+  font-family: font6;
+  src: url("./fonts/font6.ttf");
+}
+
+@font-face {
+  font-family: font1;
+  src: url("./fonts/font1.ttf");
+}
+@font-face {
+  font-family: font7;
+  src: url("./fonts/font7.ttf");
+}
+@font-face {
+  font-family: font8;
+  src: url("./fonts/font8.ttf");
+}
+@font-face {
+  font-family: font9;
+  src: url("./fonts/font9.ttf");
+}
+@font-face {
+  font-family: font10;
+  src: url("./fonts/font10.ttf");
+}
 /* LOGIN STYLE CSS */
 * {
   font-family: arial;
@@ -9,15 +50,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 50vh;
 }
 
 .mainSec {
   margin-top: 2rem;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .logBox {
   display: flex;
@@ -44,14 +85,16 @@ body {
   }
 }
 
-.logButton,.skipTopic {
+.logButton,
+.skipTopic {
   font-size: 1.5rem;
   background: limegreen;
   padding: 0.2rem 1.2rem;
   border: solid 0.1rem rgba(0, 0, 0, 0.377);
-  box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.8);
+  box-shadow: 0.1rem 0.2rem 0.1rem rgba(0, 0, 0, 0.65);
   margin: 1rem 0 0;
   font-weight: bold;
+  font-family: font7;
 }
 
 .logAbout,
@@ -90,37 +133,70 @@ footer {
 
 /* MAKE QUIZ STYLE CSS */
 
-.makerQuestion{text-align: center;margin-top: 2rem;}
+.makerHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid black;
+  padding: 0.2rem 1.5rem;
+  border-radius: 0.5rem;
+  .mkHTittle {
+    font-family: font8;
+    font-size: min(7vw, 2rem);
+  }
+  .mkAtittle {
+    font-family: font1;
+    font-size: min(7vw, 1.5rem);
+    margin: 0.4rem;
+  }
+  .roundOf {
+    font-family: font7;
+  }
+}
+
+.makerQuestion {
+  text-align: center;
+  margin-top: 1rem;
+  font-family: font5;
+  font-weight: bold;
+}
 .allLogosBox {
-
+  justify-content: center;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  
+  grid-template-columns: 40% 40%;
+  width: 100vw;
 
- 
-  
-  .logoBox{margin: 2%
-  
-    ;border: solid black 0.1rem;
+  .logoBox {
+    margin: 2%;
+    border: solid black 0.1rem;
     border-radius: 0.5rem;
-  };
-  .logoTittle{font-size: 1.5rem;font-weight: bold;text-align: center};
-  .logoImageBox{
-    max-width: 35vw;
-    max-height: 30vh;
+  }
+  .logoTittle {
+    padding: 0.5rem 0.2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .logoImageBox {
     aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
-    img{width: 90%;height: 90%;border-radius: 0.5rem;}
+    img {
+      width: 90%;
+      height: 90%;
+      border-radius: 0.5rem;
+    }
   }
 }
 
+@media (min-width: 500px) {
+  .allLogosBox {
+    grid-template-columns: 30% 30% 30%;
+    width: 55vw;
+  }
 
-@media (min-width:500px){
-  .allLogosBox{grid-template-columns: 1fr 1fr 1fr;}
-  
-  .skipBtnBox{
+  .skipBtnBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,10 +204,75 @@ footer {
 }
 
 /* SHARE LINK STYLE CSS */
-.linkBox,.sharing{display: flex;flex-direction: column;align-items: center;}
-.shareLink{font-weight: bold;font-size: 1.4rem;}
+.linkBox,
+.linkWord{font-size: min(1.7rem,5.5vw);font-family: font7;margin: 1rem 0;}
+ .shareTopBox {
+    border: solid black;
+    border-radius: 0.5rem;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .shareInfo {
+    font-family: font8;
+    font-size: min(4rem,7vw);
+  
+  }
+    .whatTo {
+    font-size: min(3rem,7vw);
+    font-family: font1;
+  }
+.sharing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  
 
-/* PLAY QUIZ STYLE CSS */
+  /* a {
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
+    text-shadow: 0.0rem 0rem 0.05rem rgb(0, 65, 119);
+  } */
+}
+.shareLink {
+  font-weight: bold;
+  font-size: min(1.9rem,6vw);
+}
 
+/* FONTS STYLE CSS */
 
+.homeHead {
+  .headTittle {
+    font-family: font8;
+    font-weight: bold;
+    font-size: min(7vw, 4rem);
+  }
+  .headSub {
+    font-family: font1;
+    font-size: min(7vw, 3rem);
+    margin-top: 0.4rem;
+  }
+  padding: 1rem;
+  border: solid rgb(0, 0, 0);
+  border-radius: 0.4rem;
+  box-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.507);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.whatName {
+  font-family: font2;
+}
+body {
+  background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(0, 0, 255, 0.4));
+  min-height: 100vh;
+}
+
+button:active {
+  transform: scale(0.9);
+  transition: all 0.15s ease-in-out;
+}

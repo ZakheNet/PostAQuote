@@ -75,13 +75,11 @@ function NextRound() {
 
         function SetLogos() {
             for (let index = 1; index < 7; index++) {
-
                 document.getElementById(`logoTittle${index}`).innerText = TittleFix(Item[onTopic][index - 1])
 
                 document.getElementById(`logo${index}`).setAttribute("src", ``)
 
                 document.getElementById(`logo${index}`).setAttribute("src", `./logo/${onTopic}/${Item[onTopic][index - 1]}.png`)
-
             }
         }
         SetLogos()

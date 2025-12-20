@@ -1,7 +1,3 @@
-/*
-*/
-console.log(124454);
-
 async function SetLink() {
     const Link = await cookieStore.get("gameLink")
     document.getElementById("shareLink").innerText = Link["value"]
@@ -10,3 +6,10 @@ async function SetLink() {
 
 
 SetLink()
+
+async function copyLink(){
+    const Link = await cookieStore.get("gameLink")
+    navigator.clipboard.writeText(Link["value"]).then(()=>{
+        document.getElementById("copyLink").innerText="COPIED!!!"
+    })
+}

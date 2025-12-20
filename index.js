@@ -4,7 +4,7 @@ const print = console.log()
 const express = require("express")
 const mongoose = require("mongoose")
 const app = express()
-const PORT = process.env.PORT || 9000
+const PORT = process.env.PORT || 5500
 const path = require("path")
 app.set("trust proxy", true);
 app.use(express.static("./public"))
@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "public")))
 
 const ConnectDB = async () => {
     try {
-        await mongoose.connect(process.env.DBString)
+        await mongoose.connect(process.env.DBString0)
         app.listen(PORT, () => { console.log("PORT:" + PORT + " Live!") })
     }
     catch(error){console.log("Error Connecting Database: "+error)}
@@ -50,7 +50,7 @@ app.post("/sharing", async (req, res) => {
     const {name,officialTopics,Picks}=req.body
     const DTime= new Date
     const gameId = Math.ceil(Math.random()*9999)+name.toLowerCase()
-    const link0 = "localhost:9000/"+"quiz/"+gameId
+    const link0 = "localhost:"+PORT+"/quiz/"+gameId
     const link = "https://friendorstranger.vercel.app/"+"quiz/"+gameId
     const page = "/share"
     const state = "good"
@@ -59,9 +59,8 @@ app.post("/sharing", async (req, res) => {
     PlayerDB.insertOne({"name":name,"gameId":gameId,"created":dob,Picks,officialTopics,"players":[{name,myIp:req.ip,score:99}]})
     
 
-    res.json({name,link:link,page,state})
+    res.json({name,link:link0,page,state})
   
-    //res.sendFile(path.join(__dirname + "/public/share.html")) 
 })
 
 app.post("/quizData",async (req,res)=>{

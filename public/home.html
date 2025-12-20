@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <header>
-        <h1>Friend Or Stranger</h1>
-        <h3>How well do they know you?</h3>
+    <header class="homeHead">
+        <p class="headTittle">Friend Or Stranger</p>
+        <p class="headSub">How well do they know you?</p>
     </header>
     <main>
         <section class="mainSec">
@@ -20,8 +20,8 @@
             <div class="logBox">
 
             <div class="logInput">
-                <p>What's your name / nickname?</p>
-                <input  id="name" name="name" required type="text" placeholder="eg. Zack">
+                <p class="whatName">What's your name / nickname?</p>
+                <input class="nameInput" id="name" name="name" required type="text" placeholder="eg. Zack">
             </div>
             <button class="logButton" onclick="CreateQuiz()">Create Quiz</button>
             </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="logAbout">
                 <p>NB:</p>
-                <p><b>This name will be shown to people you share quiz link with</b></p>
+                <p><b>Enter a one word name, with no slash("/") or spaces</b></p>
             </div>
 
         </section>

@@ -6,19 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friend Or Stranger</title>
     <link rel="stylesheet" href="styleQuiz.css">
+
 </head>
 
 <body id="playBody">
     <header></header>
     <main>
         <section class="playLogIn" id="playLogIn">
-            <h1 id="welcome">Welcome to their's Game</h1>
-            <h3>How well do you know them</h3>
-
+            <div class="topBar">
+                <h1 class="bar1">Friend Or Stranger</h1>
+                <h3 class="bar2" id="welcome">Invalid Link!</h3>
+            </div>
             <div class="logBox">
 
                 <div class="logInput">
-                    <p>Enter your name / nickname?</p>
+                    <p class="whatName">Enter your name / nickname?</p>
                     <input autocomplete="name" id="name" name="name" required type="text" placeholder="eg. Zack">
                 </div>
                 <button class="logButton" onclick="StartQuiz()">Start Quiz</button>
@@ -36,8 +38,11 @@
             </div>
         </section>
         <section class="playground notReady" id="playground">
+            <div class="topBar">
+            <h1 class="bar1">Friend Or Stranger</h1>
             <h2 id="round" class="round">1 of 0</h2>
-            <h2 id="roundTopic" class="makerQuestion">Which one do you prefer?</h2>
+            </div>
+            <h2 id="roundTopic" class="makerQuestion bar2">Which one do you prefer?</h2>
             <section id="logozSec" class="allLogosBox">
                 <div onclick="pick1()" class="logoBox">
                     <p class="logoTittle" id="logoTittle1">Logo Tittle</p>
@@ -80,6 +85,56 @@
     </main>
     <footer></footer>
     <style>
+        @font-face {
+            font-family: font2;
+            src: url("./fonts/font2.ttf");
+        }
+
+        @font-face {
+            font-family: font3;
+            src: url("./fonts/font3.ttf");
+        }
+
+        @font-face {
+            font-family: font4;
+            src: url("./fonts/font4.ttf");
+        }
+
+        @font-face {
+            font-family: font5;
+            src: url("./fonts/font5.ttf");
+        }
+
+        @font-face {
+            font-family: font6;
+            src: url("./fonts/font6.ttf");
+        }
+
+        @font-face {
+            font-family: font1;
+            src: url("./fonts/font1.ttf");
+        }
+
+        @font-face {
+            font-family: font7;
+            src: url("./fonts/font7.ttf");
+        }
+
+        @font-face {
+            font-family: font8;
+            src: url("./fonts/font8.ttf");
+        }
+
+        @font-face {
+            font-family: font9;
+            src: url("./fonts/font9.ttf");
+        }
+
+        @font-face {
+            font-family: font10;
+            src: url("./fonts/font10.ttf");
+        }
+
         * {
             font-family: arial;
             box-sizing: border-box;
@@ -126,9 +181,10 @@
             background: limegreen;
             padding: 0.2rem 1.2rem;
             border: solid 0.1rem rgba(0, 0, 0, 0.377);
-            box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.8);
+            box-shadow: 0.1rem 0.2rem 0.1rem rgba(0, 0, 0, 0.65);
             margin: 1rem 0 0;
             font-weight: bold;
+            font-family: font7;
         }
 
         .logAbout,
@@ -208,11 +264,47 @@
             }
         }
 
+        .topBar {
+            display: flex;
+            flex-direction: column;
+            border: solid;
+            padding: 0.4rem;
+            border-radius: 0.5rem;
+            margin: 1rem 2rem 3rem;
+            align-items: center;
+
+
+        }
+
+        .bar1 {
+            font-family: font8;
+            font-size: min(4rem, 7vw);
+        }
+
+        .bar2 {
+            font-size: min(3rem, 7vw);
+            font-family: font5;
+        }
 
         @media (min-width:500px) {
             .allLogosBox {
                 grid-template-columns: 1fr 1fr 1fr;
             }
+        }
+
+
+        .whatName {
+            font-family: font2;
+        }
+
+        body {
+            background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(0, 0, 255, 0.4));
+            min-height: 100vh;
+        }
+
+        button:active {
+            transform: scale(0.9);
+            transition: all 0.15s ease-in-out;
         }
     </style>
 
@@ -344,7 +436,7 @@
                 }
                 document.getElementById("roundTopic").innerText = questionText
 
-                 function SetLogos() {
+                function SetLogos() {
                     for (let index = 1; index < 7; index++) {
 
                         document.getElementById(`logoTittle${index}`).innerText = TittleFix(Item[onTopic][index - 1])
@@ -439,18 +531,18 @@
 
             score = ScoreCalc()
 
-            document.getElementById("playBody").innerHTML="<h1>Loading...</h1>"
+            document.getElementById("playBody").innerHTML = "<h1>Loading...</h1>"
 
-            const response = await fetch("/played", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "name": username, score, gameId: gameData["gameId"] }) }).then(res=>res.json())
+            const response = await fetch("/played", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "name": username, score, gameId: gameData["gameId"] }) }).then(res => res.json())
 
             /* if (response.status != 200) {
                 console.log("Error Occured");
                 return
             } */
 
-            if(response["state"]=="good"){
-                window.location.href=`/scores/${gameData["gameId"]}`
-            } 
+            if (response["state"] == "good") {
+                window.location.href = `/scores/${gameData["gameId"]}`
+            }
 
 
 
