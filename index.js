@@ -15,10 +15,10 @@ app.use(express.static(path.join(__dirname, "public")))
 
 const ConnectDB = async () => {
     try {
-        await mongoose.connect(DEV? process.env.DBString0:process.env.DBString)
+        await mongoose.connect(DEV ? process.env.DBString0 : process.env.DBString)
         app.listen(PORT, () => { console.log("PORT:" + PORT + " Live!") })
     }
-    catch(error){console.log("Error Connecting Database: "+error)}
+    catch (error) { console.log("Error Connecting Database: " + error) }
 }
 
 ConnectDB()
@@ -26,15 +26,15 @@ ConnectDB()
 mongoose.connection.once("open", () => console.log("DB Connected!"))
 mongoose.connection.on("error", () => console.log("DB Error!"))
 
-const PlayerSchema=new mongoose.Schema({name:String,gameId:String,created:String,Picks:Object,officialTopics:Array,players:[{name:String,myIp:String,score:Number}]})
-const PlayerDB = mongoose.model("Player",PlayerSchema,"players")
+const PlayerSchema = new mongoose.Schema({ name: String, gameId: String, created: String, Picks: Object, officialTopics: Array, players: [{ name: String, myIp: String, score: Number }] })
+const PlayerDB = mongoose.model("Player", PlayerSchema, "players")
 
 app.get("/", async (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/home.html")) 
+    res.sendFile(path.join(__dirname + "/public/home.html"))
 })
 
 app.get("/MakeQuiz", async (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/makequiz.html")) 
+    res.sendFile(path.join(__dirname + "/public/makequiz.html"))
 })
 
 app.get('/quiz/:gameId', (req, res) => {
@@ -42,82 +42,83 @@ app.get('/quiz/:gameId', (req, res) => {
 })
 
 app.get("/share", async (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/share.html")) 
+    res.sendFile(path.join(__dirname + "/public/share.html"))
 })
 
 app.post("/sharing", async (req, res) => {
-    const {name,officialTopics,Picks}=req.body
-    const DTime= new Date
-    const gameId = Math.ceil(Math.random()*9999)+name.toLowerCase()
-    const link = DEV? "localhost:"+PORT+"/quiz/"+gameId : "https://friendorstranger.vercel.app/"+"quiz/"+gameId
+    const { name, officialTopics, Picks } = req.body
+    const DTime = new Date
+    const gameId = Math.ceil(Math.random() * 9999) + name.toLowerCase()
+    const link = DEV ? "localhost:" + PORT + "/quiz/" + gameId : "https://friendorstranger.vercel.app/" + "quiz/" + gameId
     const page = "/share"
     const state = "good"
-    const dob = DTime.getDate()+"/"+(DTime.getMonth()+1)+"/"+DTime.getFullYear()
+    const dob = DTime.getDate() + "/" + (DTime.getMonth() + 1) + "/" + DTime.getFullYear()
 
-    PlayerDB.insertOne({"name":name,"gameId":gameId,"created":dob,Picks,officialTopics,"players":[{name,myIp:req.ip,score:99}]})
-    
+    PlayerDB.insertOne({ "name": name, "gameId": gameId, "created": dob, Picks, officialTopics, "players": [{ name, myIp: req.ip, score: 99 }] })
 
-    res.json({name,link,page,state})
-  
+
+    res.json({ name, link, page, state })
+
 })
 
-app.post("/quizData",async (req,res)=>{
-    
+app.post("/quizData", async (req, res) => {
+
     const gameId = req.body["gameId"]
-    const gameData = await PlayerDB.findOne({gameId:gameId})    
-    if(gameData==null || gameData==undefined){
-        res.json({"state":"nogame"})
+    const gameData = await PlayerDB.findOne({ gameId: gameId })
+    if (gameData == null || gameData == undefined) {
+        res.json({ "state": "nogame" })
         return
     }
 
     let exist = false
-    gameData["players"].map(player=>{
-        if(player.myIp==req.ip){
-            exist=true
+    gameData["players"].map(player => {
+        if (player.myIp == req.ip) {
+            exist = true
         }
     })
 
-    if(exist){
+    if (exist) {
         console.log("THis player has played!");
+        res.json({ "state": "played", "page": "/scores/"+gameId })
     }
 
-    
-    res.json({"state":"good","data":gameData})
+
+    res.json({ "state": "good", "data": gameData })
 })
 
-app.post("/played",async (req,res)=>{
-    const data=req.body
+app.post("/played", async (req, res) => {
+    const data = req.body
     console.log(data);
     AddPlayer(data)
     let state = "bad"
-    async function AddPlayer(data){
-        await PlayerDB.updateOne({gameId:data["gameId"]},{$push:{players:{name:data["name"],myIp:req.ip,score:data["score"]}}})
-        state="good"
-        res.json({state})
+    async function AddPlayer(data) {
+        await PlayerDB.updateOne({ gameId: data["gameId"] }, { $push: { players: { name: data["name"], myIp: req.ip, score: data["score"] } } })
+        state = "good"
+        res.json({ state })
     }
 })
 
 app.get('/scores/:gameId', (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/score.html")) 
+    res.sendFile(path.join(__dirname + "/public/score.html"))
 })
 
 app.get('/scoresData/:gameId', (req, res) => {
     const gameId = req.params.gameId
-    async function getScores(gameId){
-        const data = await PlayerDB.find({gameId},"players")
-        res.json(data)     
+    async function getScores(gameId) {
+        const data = await PlayerDB.find({ gameId }, "players")
+        res.json(data)
     }
     getScores(gameId)
-  
+
 })
 
 app.get('/gameOwner/:gameId', (req, res) => {
     const gameId = req.params.gameId
-    async function getScores(gameId){
-        const data = await PlayerDB.find({gameId},"name")
-        res.json(data)     
+    async function getScores(gameId) {
+        const data = await PlayerDB.find({ gameId }, "name")
+        res.json(data)
     }
     getScores(gameId)
-  
+
 })
 
